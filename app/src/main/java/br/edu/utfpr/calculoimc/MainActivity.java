@@ -1,79 +1,71 @@
-package br.edu.utfpr.calculoimc;
 
-import androidx.appcompat.app.AppCompatActivity;
+package br.edu.utfpr.calculaimc;
+import br.edu.utfpr.calculoimc.R;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import br.edu.utfpr.calculoimc.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextAltura;
-    private EditText editTextPeso;
-    private Button buttonCalculate;
-    private Button buttonClear; // Adicione esta linha
-    private TextView textViewResult;
+    private EditText etPeso;
+    private EditText etAltura;
+    private TextView tvResultado;
+    private Button btLimpar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextAltura = findViewById(R.id.editTextAltura);
-        editTextPeso = findViewById(R.id.editTextPeso);
-        buttonCalculate = findViewById(R.id.buttonCalculate);
-        buttonClear = findViewById(R.id.buttonClear); // Adicione esta linha
-        textViewResult = findViewById(R.id.textViewResult);
+        etPeso = findViewById( R.id.etPeso );
+        etAltura = findViewById( R.id.etAltura );
+        tvResultado = findViewById( R.id.tvResultado );
+        btLimpar = findViewById( R.id.btLimpar );
 
-        buttonCalculate.setOnClickListener(new View.OnClickListener() {
+        btLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculateIMC();
+                btLimparOnClick();
             }
         });
 
-        // Adicione o OnClickListener para o buttonClear dentro do onCreate
-        buttonClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                limparValues();
-            }
-        });
-    }
+    } //fim do onCreate()
 
-    private void calculateIMC() {
-        String alturaStr = editTextAltura.getText().toString();
-        String pesoStr = editTextPeso.getText().toString();
+    public void btCalcularOnClick( View v ) {
 
-        if (alturaStr.isEmpty() || pesoStr.isEmpty()) {
-            Toast.makeText(this, "Por favor, insira altura e peso", Toast.LENGTH_SHORT).show();
+        //entrada
+        if ( etPeso.getText().toString().isEmpty() ) {
+            etPeso.setError( "Campo peso deve ser preenchido." );
+            etPeso.requestFocus();
             return;
         }
 
-        try {
-            float altura = Float.parseFloat(alturaStr);
-            float peso = Float.parseFloat(pesoStr);
-
-            if (altura <= 0 || peso <= 0) {
-                Toast.makeText(this, "Altura e peso devem ser maiores que zero", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            float imc = altura / (peso * peso);
-            String imcResult = String.format("Seu IMC é: %.2f", imc);
-            textViewResult.setText(imcResult);
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Por favor, insira valores válidos", Toast.LENGTH_SHORT).show();
+        if ( etAltura.getText().toString().isEmpty() ) {
+            etAltura.setError( "Campo altura deve ser preenchido." );
+            etAltura.requestFocus();
+            return;
         }
+
+        double resultado = Double.parseDouble( etPeso.getText().toString() ) / Math.pow( Double.parseDouble( etAltura.getText().toString() ), 2 );
+
+        DecimalFormat df = new DecimalFormat( "0.00" );
+        tvResultado.setText( df.format( resultado ) );
     }
 
-    private void limparValues() {
-        editTextAltura.setText("");
-        editTextPeso.setText("");
-        textViewResult.setText("");
+    private void btLimparOnClick() {
+        etPeso.setText( "" );
+        etAltura.setText( "" );
+        tvResultado.setText( "0.0" );
+        etPeso.requestFocus();
     }
-}
+
+
+} //fim da MainActivity

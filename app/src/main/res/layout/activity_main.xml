@@ -1,65 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="@android:dimen/app_icon_size"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextAltura"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Altura (m)"
-        android:inputType="numberDecimal"/>
+        android:text="Peso:" />
 
     <EditText
-        android:id="@+id/editTextPeso"
-        android:layout_width="match_parent"
+        android:id="@+id/etPeso"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Peso (kg)"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="16dp"/>
+        android:hint="Peso em KG"
+        android:inputType="numberDecimal" />
 
     <TextView
-        android:id="@+id/textViewResult"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Seu IMC"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:textSize="18sp"/>
+        android:text="Altura:" />
+
+    <EditText
+        android:id="@+id/etAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Altura em m"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMC:" />
+
+    <TextView
+        android:id="@+id/tvResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonCalculate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            android:padding="20dp"
-            android:text="Calcular Isso"/>
-
-        <Button
-            android:id="@+id/buttonClear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            android:padding="20dp"
-            android:text="Limpar"/>
-
-        <TextView
-            android:id="@+id/toast_text"
+            android:id="@+id/btCalcular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"/>
+            android:onClick="btCalcularOnClick"
+            android:text="Calcular"/>
+
+        <Button
+            android:id="@+id/btLimpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Limpar"/>
+
     </LinearLayout>
+
 </LinearLayout>
