@@ -1,5 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(google()
+        .auto.service
+        .plugin)
+    alias(libs.plugins.kotlin.kapt)
+    alias(mavenCentral())
 }
 
 android {
@@ -29,6 +35,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    dependenciesInfo {
+        includeInApk = true
+        includeInBundle = true
+    }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
